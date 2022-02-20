@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ADMIN - Massa na Caveira</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "admins", "data-turbo-track": "reload" %>
+
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <%= render 'side-bar' %>
+
+        <%= render 'top-navigation' %>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3> Dashboard </h3>
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <%= render 'footer' %>
+      </div>
+    </div>
+
+    <%= javascript_include_tag 'admins' %>
+    
+  </body>
+</html>

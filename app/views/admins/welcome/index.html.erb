@@ -1,0 +1,8 @@
+<h1>Admins::Welcome#index</h1>
+
+<% if user_signed_in? %>
+    <p> Usuário logado </p>
+    <p> <%= current_user.username %> </p>
+<% else %>
+    <p> Usuário não logado </p>
+<% end %>

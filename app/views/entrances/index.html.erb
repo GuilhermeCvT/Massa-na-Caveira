@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Entrances</h1>
+
+<div id="entrances">
+  <% @entrances.each do |entrance| %>
+    <%= render entrance %>
+    <p>
+      <%= link_to "Show this entrance", entrance %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New entrance", new_entrance_path %>
