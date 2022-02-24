@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admins do
-    get 'users/index'
-    get 'welcome/index'
+    get 'welcome/index' # Dashboard
+    resources :users    # Usuários
   end
 
   namespace :admin do
@@ -19,10 +19,10 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   devise_scope :user do
-    get 'admin', to: 'devise/sessions#new'
+    get 'admin', to: 'admins/welcome#index'
   end
 
-  get "admin", to: "devise/sessions#new"
+  get "admin", to: "admins/welcome#index"
 
   root 'questions/welcome#index'
   # Defines the root path route ("/")
