@@ -16,15 +16,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Permissão de acesso<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="heard" class="form-control" class='optional' required>
-                    <% @entrances.each do |entrance| %>
-                        <% if entrance.id == @user.entrance_id %>
-                            <option value="<%= entrance.id %>" selected="selected"><%= entrance.description %></option>
-                        <% else %>
-                            <option value="<%= entrance.id %>"><%= entrance.description %></option>
-                        <% end %>
-                    <% end %>
-                </select>
+                <%= collection_select(:user, :entrance, Entrance.all, :id, :description, id:"heard", class:"form-control", class:'optional', required:"required", selected: @user.entrance_id) %>
             </div>
         </div>
         
@@ -56,15 +48,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Empresa<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <select id="heard" class="form-control" class='optional' required>
-                    <% @companies.each do |company| %>
-                        <% if company.id == @user.company_id %>
-                            <option value="<%= company.id %>" selected="selected"><%= company.description %></option>
-                        <% else %>
-                            <option value="<%= company.id %>"><%= company.description %></option>
-                        <% end %>
-                    <% end %>
-                </select>
+                <%= collection_select(:user, :company, Company.all, :id, :description, id:"heard", class:"form-control", class:'optional', required:"required", selected: @user.company_id) %>
             </div>
         </div>
 

@@ -11,6 +11,6 @@ class Admins::UsersController < AdminsController
 
   def update
     @user = User.find(params[:id])
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :company, :entrance)
   end
 end
