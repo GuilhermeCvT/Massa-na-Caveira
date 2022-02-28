@@ -1,6 +1,6 @@
 class Admins::UsersController < AdminsController
   before_action :verify_password, only: [:update]
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :destroy]
   before_action :create, only: [:params_user]
 
   def index
@@ -13,9 +13,8 @@ class Admins::UsersController < AdminsController
 
   def create
     @user = User.new(params_user)
-
     if @user.save
-      redirect_to admins_users_path, notice: "Usuário Cadastrado com sucesso!"
+      redirect_to admins_users_path, notice: "Usuário cadastrado com sucesso!"
     else 
       render :new # renderiza a página de edit novamente 
     end
@@ -29,13 +28,21 @@ class Admins::UsersController < AdminsController
     if @user.update(params_user)
       redirect_to admins_users_path, notice: "Usuário atualizado com sucesso!"
     else 
-      render :edit # renderiza a página de edit novamente 
+      render :edit # renderiza a página de edit
+    end
+  end
+
+  def destroy
+    if @user.destroy
+      redirect_to admins_users_path, notice: "Usuário excluído com sucesso!"
+    else 
+      render :index # renderiza a página de usuários 
     end
   end
 
   private
   def params_user
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :company_id, :entrance_id)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :company_id, :entrance_id, :enable)
   end
 
   def set_user

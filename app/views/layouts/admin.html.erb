@@ -20,9 +20,9 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <%= render 'side-bar' %>
+        <%= render 'admins/side-bar' %>
 
-        <%= render 'top-navigation' %>
+        <%= render 'admins/top-navigation' %>
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -36,11 +36,22 @@
         </div>
         <!-- /page content -->
 
-        <%= render 'footer' %>
+        <%= render 'admins/footer' %>
       </div>
     </div>
 
     <%= javascript_include_tag 'admins' %>
+
+    <% if notice %>
+      <script>
+        $.bootstrapGrowl('<%= notice %>', {
+          type: 'success', // (null, 'info', 'danger', 'success')
+          align: 'right', // ('left', 'right', or 'center')
+          allow_dismiss: true, // If true then will display a cross to close the popup.
+          stackup_spacing: 10 // spacing between consecutively stacked growls.
+        });
+      </script>
+    <% end %>
     
   </body>
 </html>

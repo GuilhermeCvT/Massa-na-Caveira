@@ -1,14 +1,44 @@
-<p style="color: green"><%= notice %></p>
+<h1>Praças</h1>
 
-<h1>Companies</h1>
-
-<div id="companies">
-  <% @companies.each do |company| %>
-    <%= render company %>
-    <p>
-      <%= link_to "Show this company", company %>
-    </p>
-  <% end %>
+<div class="btn-group btn-group-sm">
+    <%= link_to new_company_path, class:"btn btn-success btn-sm" do %>
+        <i class="fa fa-plus"></i> Cadastrar
+    <% end %>
 </div>
 
-<%= link_to "New company", new_company_path %>
+<hr>
+
+<table id="datatable" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+        <th>#</th>
+        <th>Praça</th>
+        <th>Ativo</th>
+        <th>Criado em</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @companies.each do |company| %>
+          <tr>
+              <td> <%= company.id %> </td>
+              <td> <%= company.description %> </td>
+              <% if company.enable == true %>
+                  <td> <input type="checkbox" checked disabled> </td>
+              <% else %>
+                  <td> <input type="checkbox" disabled> </td>
+              <% end %>
+              <td> <%= company.created_at %> </td>
+
+              <td> 
+                  <%= button_to edit_company_path(company), method: :get, class:"btn-info btn-xs btn-round" do %>
+                      <i class="fa fa-pencil"></i>
+                  <% end %>
+                  <%= button_to company_path(company), method: :delete, class:"btn-danger btn-xs btn-round", :onclick => "return confirm ('Deseja realmente excluir o usuário?')" do %>
+                      <i class="fa fa-trash-o"></i>
+                  <% end %>
+              </td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>

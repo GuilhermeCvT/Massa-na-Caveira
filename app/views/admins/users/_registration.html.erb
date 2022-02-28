@@ -19,7 +19,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Permissão de acesso<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <%= collection_select(:user, :entrance_id, Entrance.all, :id, :description, id:"heard", class:"form-control", class:'optional', required:"required", selected: @user.entrance_id) %>
+                <%= form.collection_select :entrance_id, Entrance.all, :id, :description, { :prompt => 'Selecione a permissão' }, { id:"heard", class: "form-control optional", required:"required", selected: @user.entrance_id} %>
             </div>
         </div>
         
@@ -30,14 +30,14 @@
             </div>
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Senha<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Senha</label>
             <div class="col-md-6 col-sm-6">
                 <%= form.password_field :password, class:"form-control", value: "", pattern:"{6,}", title:"Minimum 8 Characters Including An Upper And Lower Case Letter, A Number And A Unique Character" %>
             </div>
         </div>
         
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Confirmar senha<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Confirmar senha</label>
             <div class="col-md-6 col-sm-6">
                 <%= form.password_field :password_confirmation, class:"form-control", value: "" %>
             </div>
@@ -46,8 +46,13 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Empresa<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <%= collection_select(:user, :company_id, Company.all, :id, :description, id:"heard", class:"form-control", class:'optional', required:"required", selected: @user.company_id) %>
+                <%= form.collection_select :company_id, Company.all, :id, :description, { :prompt => 'Selecione a empresa' }, { id: "heard", class: "form-control optional", required: "required", selected: @user.company_id} %>
             </div>
+        </div>
+
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Ativo</label>
+            <%= form.check_box :enable, {class: ""}, "true", "false" %>
         </div>
 
         <div class="form-group">

@@ -4,3 +4,4 @@
 //= require nprogress/nprogress
 //= require fastclick/lib/fastclick
 //= require custom
+//= require bootstrap-growl-ifightcrime/jquery.bootstrap-growl
