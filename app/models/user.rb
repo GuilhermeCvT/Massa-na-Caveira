@@ -7,4 +7,6 @@ class User < ApplicationRecord
   # Associação dos campos com as tabelas "companies" e "entrances"
   belongs_to :company
   belongs_to :entrance
+
+  paginates_per 5
 end

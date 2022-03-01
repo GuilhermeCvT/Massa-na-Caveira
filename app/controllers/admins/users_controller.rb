@@ -4,7 +4,7 @@ class Admins::UsersController < AdminsController
   before_action :create, only: [:params_user]
 
   def index
-    @users = User.all.order(:id)
+    @users = User.all.order(:username).page params[:page]
   end
 
   def new

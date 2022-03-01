@@ -28,7 +28,7 @@
               <% else %>
                   <td> <input type="checkbox" disabled> </td>
               <% end %>
-              <td> <%= company.created_at %> </td>
+              <td> <%= l company.created_at, format: :normal %> </td>
 
               <td> 
                   <%= button_to edit_company_path(company), method: :get, class:"btn-info btn-xs btn-round" do %>
