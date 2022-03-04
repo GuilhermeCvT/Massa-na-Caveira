@@ -1,26 +1,53 @@
-<h2>Log in</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <title>Gentelella Alela! | </title>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "admins", "data-turbo-track": "reload" %>
+  </head>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+  <body class="login">
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <h1>Massa na Caveira</h1>
+            <div>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control', required:'required', placeholder:'E-mail' %>
+            </div>
+            <div>
+              <%= f.password_field :password, autocomplete: "current-password", class:'form-control', placeholder:'Senha', required:'required' %>
+            </div>
+
+            <div class="clearfix"></div>            
+
+            <div class="separator">
+              <div class="actions">
+                <%= f.submit "Entrar", class:'btn btn-warning container-fluid' %>
+              </div>
+            </div> 
+
+            <div class="separator">              
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>          
+        </section>
+      </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+    <%= javascript_include_tag 'admins' %>
+  
+  </body>
+</html>
