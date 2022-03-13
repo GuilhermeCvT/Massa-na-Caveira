@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: massa_na_caveira_production
-  username: massa_na_caveira
+  username: guilherme
   password: <%= ENV["MASSA_NA_CAVEIRA_DATABASE_PASSWORD"] %>
