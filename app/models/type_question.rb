@@ -1,0 +1,2 @@
+class TypeQuestion < ApplicationRecord
+end

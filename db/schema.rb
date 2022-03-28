@@ -10,19 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_113615) do
+ActiveRecord::Schema.define(version: 2022_03_27_234245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "answers", force: :cascade do |t|
+    t.text "description"
+    t.bigint "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
   create_table "companies", force: :cascade do |t|
-    t.string "description"
-    t.boolean "enable"
+    t.string "description", null: false
+    t.boolean "enable", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "determined_answers", force: :cascade do |t|
+    t.string "description", null: false
+    t.bigint "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_determined_answers_on_question_id"
+  end
+
   create_table "entrances", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.boolean "enable", default: true
+    t.integer "priority", default: 0
+    t.text "description", null: false
+    t.bigint "type_question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["type_question_id"], name: "index_questions_on_type_question_id"
+  end
+
+  create_table "type_questions", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -36,16 +68,19 @@ ActiveRecord::Schema.define(version: 2022_02_05_113615) do
     t.datetime "remember_created_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
+    t.string "username", null: false
     t.bigint "company_id", null: false
     t.bigint "entrance_id", null: false
-    t.boolean "enable"
+    t.boolean "enable", default: true
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["entrance_id"], name: "index_users_on_entrance_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "determined_answers", "questions"
+  add_foreign_key "questions", "type_questions"
   add_foreign_key "users", "companies"
   add_foreign_key "users", "entrances"
 end
