@@ -1,0 +1,2 @@
+module Questionnaire::WelcomeHelper
+end

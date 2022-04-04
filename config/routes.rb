@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get 'questionnaire/index'
 
-  namespace :questions do
+  namespace :questionnaire do
     get 'welcome/index'
   end
 
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   
   resources :entrances
   resources :companies
+  resources :questions
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   devise_scope :user do
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
 
   get "admin", to: "admins/welcome#index"
 
-  root 'questions/welcome#index'
+  root 'questionnaire/welcome#index'
   # Defines the root path route ("/")
   # root "articles#index"
 end

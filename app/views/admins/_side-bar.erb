@@ -22,10 +22,9 @@
         <ul class="nav side-menu">
           <li><a><i class="fa fa-edit"></i> Cadastros <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <% if current_user.entrance.description == "Administrador" %> 
-                
-              <% end %>
-              <li><a href="form_validation.html">Perguntas</a></li>
+              <li><%= link_to questions_path do %>
+                Perguntas
+              <% end %></li>
             </ul>
           </li>
           <li><a><i class="fa fa-search"></i> Consulta <span class="fa fa-chevron-down"></span></a>
