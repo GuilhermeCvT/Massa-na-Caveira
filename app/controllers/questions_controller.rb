@@ -5,11 +5,12 @@ class QuestionsController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    @questions = Question.all.order(:description).page params[:page]
+    @questions = Question.all.order(:priority).page params[:page]
   end
 
   # GET /companies/1 or /companies/1.json
   def show
+
   end
 
   # GET /companies/new
@@ -27,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to question_path , notice: "Praça cadastrada com sucesso!"
+      redirect_to questions_path , notice: "Praça cadastrada com sucesso!"
     else 
       render :new # renderiza a página de edit novamente 
     end
@@ -36,7 +37,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /companies/1 or /companies/1.json
   def update
     if @question.update(question_params)
-      redirect_to question_path, notice: "Praça atualizada com sucesso!"
+      redirect_to questions_path, notice: "Praça atualizada com sucesso!"
     else 
       render :edit # renderiza a página de edit
     end
@@ -46,7 +47,7 @@ class QuestionsController < ApplicationController
   def destroy
     
     if @question.destroy
-      redirect_to question_path, notice: "Praça excluída com sucesso!"
+      redirect_to questions_path, notice: "Praça excluída com sucesso!"
     else 
       render :index # renderiza a página de usuários 
     end
@@ -60,7 +61,7 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:description, :enable, :priority, :type_question)
+      params.require(:question).permit(:description, :enable, :priority, :type_question_id)
     end
 
     def determined_params

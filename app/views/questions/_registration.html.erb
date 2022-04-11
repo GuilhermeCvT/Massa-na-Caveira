@@ -1,0 +1,54 @@
+<div class="x_content">
+    <% if @question.errors.any? %>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <ul>
+                <% @question.errors.full_messages.each do |message| %>
+                    <li> <%= message %> </li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= form_with(model: [@question], local: true) do |form| %>
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Pergunta<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <%= form.text_area :description, class:"form-control", required:"required", value: @question.description %>
+            </div>
+        </div>
+
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Prioridade</label>
+            <div class="col-md-6 col-sm-6">
+                <%= form.number_field :priority, class:"form-control", required:"required", value: @question.priority %>
+            </div>
+        </div>
+
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Tipo de pergunta<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <%= form.collection_select :type_question_id, TypeQuestion.all, :id, :description, { :prompt => 'Selecione o tipo' }, { id: "heard", class: "form-control optional", required: "required", selected: @question.type_question_id} %>
+            </div>
+        </div>
+        
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Criado em</label>
+            <div class="col-md-2 col-sm-6">
+                <%= form.text_field :create, class:"form-control", required:"required", value: @question.created_at, disabled: "disabled" %>
+            </div>
+        </div>
+
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Ativo</label>
+            <%= form.check_box :enable, {class: ""}, "true", "false" %>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6 offset-md-3">
+                <button type='submit' class="btn btn-primary">Salvar</button>
+                <a href="/questions" type='reset' class="btn btn-success">Voltar</a>
+            </div>
+        </div>
+    <% end %>
+</div>

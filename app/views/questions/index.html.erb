@@ -1,2 +1,48 @@
-<h1>Questions#index</h1>
-<p>Find me in app/views/questions/index.html.erb</p>
+<h1>Perguntas</h1>
+
+<div class="btn-group btn-group-sm">
+    <%= link_to new_question_path, class:"btn btn-success btn-sm" do %>
+        <i class="fa fa-plus"></i> Cadastrar
+    <% end %>
+</div>
+
+<hr>
+
+<table id="datatable" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+        <th>Prioridade</th>
+        <th>Pergunta</th>
+        <th>Ativo</th>
+        <th>Criado em</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @questions.each do |question| %>
+          <tr>
+              <td> <%= question.priority %> </td>
+              <td> <%= question.description %> </td>
+              <% if question.enable == true %>
+                  <td> <input type="checkbox" checked disabled> </td>
+              <% else %>
+                  <td> <input type="checkbox" disabled> </td>
+              <% end %>
+              <td> <%= l question.created_at, format: :normal %> </td>
+
+              <td> 
+                  <%= button_to edit_question_path(question), method: :get, class:"btn-info btn-xs btn-round" do %>
+                      <i class="fa fa-pencil"></i>
+                  <% end %>
+                  <%= button_to question_path(question), method: :delete, class:"btn-danger btn-xs btn-round", :onclick => "return confirm ('Deseja realmente excluir o usuário?')" do %>
+                      <i class="fa fa-trash-o"></i>
+                  <% end %>
+              </td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-center">
+    <%= paginate @questions %>
+</div>
